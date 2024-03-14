@@ -1,13 +1,18 @@
-
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './Pages/home';
+import ResultsArray from './Pages/resultsArray'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-          <h1 className='text-pink-900'>hello</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}>
+           <Route path="/array" element={<ResultsArray />} /> 
+           {/* Miht need to include index */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
