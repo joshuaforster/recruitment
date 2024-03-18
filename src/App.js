@@ -11,7 +11,7 @@ import SignUp from './Pages/signUp';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDR3EPa-hKwzT6agWnSSx5Pa-5dOEGEicU",
@@ -22,8 +22,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
 // 
 
 const JobContext = React.createContext();
