@@ -1,11 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { JobContext } from '../App'; // Adjust the path to where your App.js is located
+
+export default function ResultsArray() {
+  const { jobList } = React.useContext(JobContext);
 
 
-export default function ResultsArray(){
+console.log(jobList)
 
-    return(
-        <>
-            <h1 className='text-black'>This is results</h1>
-        </>
-    )
+  return (
+    <div>
+      {jobList.map((job, index) => (
+        <div key={index}>
+          {/* Render job details here, e.g., */}
+          <h2>{job.title}</h2>
+          <p>{job.companyName}</p>
+          {/* Add more job details that you want to display */}
+        </div>
+      ))}
+    </div>
+  );
 }
