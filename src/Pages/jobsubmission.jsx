@@ -57,6 +57,7 @@ export default function JobSubmission(){
         contactNumber: '',
         remoteWork: '', // Assume a binary choice for simplicity; adapt as needed
         companyLogo: null, // To handle file uploads, initially null
+        isApproved: false
       });
 
 
@@ -88,256 +89,291 @@ export default function JobSubmission(){
       }
       
 
-      return(
-        <form onSubmit={handleSubmit} className='flex flex-col'>
-            <input
-                // Title 
-                type='text'
-                placeholder='Title'
-                onChange={handleChange}
-                name='title'
-                value={jobDetailData.title}
-            />
-            <input 
-                // CompanyName
+        return (
+            <div className="mx-4 md:mx-12 lg:mx-24 border p-4 rounded-lg shadow-lg">
+                <h1 className="text-2xl font-bold my-4">Create a job advert</h1> 
+              <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+                <input
+                  className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                  type="text"
+                  placeholder="Title"
+                  onChange={handleChange}
+                  name="title"
+                  value={jobDetailData.title}
+                  required
+                />
+                <input
+                  className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                  type="text"
+                  placeholder="Company Name"
+                  onChange={handleChange}
+                  name="companyName"
+                  value={jobDetailData.companyName}
+                />
+                <input
+                  className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                  type="text"
+                  placeholder="Location"
+                  onChange={handleChange}
+                  name="location"
+                  value={jobDetailData.location}
+                />
+                <fieldset className="border p-3 rounded-md">
+                  <legend className="font-semibold">Type of job</legend>
+                  <div className="flex items-center space-x-6">
+                    <input
+                      className="accent-blue-500"
+                      type="radio"
+                      id="Full-Time"
+                      name="jobType"
+                      value="Full-Time"
+                      checked={jobDetailData.jobType === "Full-Time"}
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="Full-Time" className="cursor-pointer">Full-Time</label>
+          
+                    <input
+                      className="accent-blue-500"
+                      type="radio"
+                      id="Part-Time"
+                      name="jobType"
+                      value="Part-Time"
+                      checked={jobDetailData.jobType === "Part-Time"}
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="Part-Time" className="cursor-pointer">Part-Time</label>
+          
+                    <input
+                      className="accent-blue-500"
+                      type="radio"
+                      id="Contract"
+                      name="jobType"
+                      value="Contract"
+                      checked={jobDetailData.jobType === "Contract"}
+                      onChange={handleChange}
+                    />
+                    <label htmlFor="Contract" className="cursor-pointer">Contract</label>
+                  </div>
+                </fieldset>
+                <input
+                  className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Job Category"
+                  type="text"
+                  name="category"
+                  id="category"
+                  onChange={handleChange}
+                  value={jobDetailData.category}
+                />
+                <input
+                  className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Salary Range"
+                  id="salayRange"
+                  name="salaryRange"
+                  type="text"
+                  onChange={handleChange}
+                  value={jobDetailData.salaryRange}
+                />
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Experience Level"
+                id="experienceLevel"
+                name="experienceLevel"
                 type="text"
-                placeholder='Company Name'
-                onChange={handleChange}
-                name='companyName'
-                value={jobDetailData.companyName}
-            />
-            <input 
-                // Location
-                type="text"
-                placeholder='Location'
-                onChange={handleChange}
-                name='location'
-                value={jobDetailData.location}
-            />
-            <fieldset>
-                {/* type of job */}
-                <legend>Type of job</legend>
-                <input
-                    type='radio'
-                    id='Full-Time'
-                    name='jobType'
-                    value='Full-Time'
-                    checked={jobDetailData.jobType === 'Full-Time'}
-                    onChange = {handleChange}
-                />
-                <label htmlFor='Full-Time'>Full-Time</label>
-                <input
-                    type='radio'
-                    id='Part-Time'
-                    name='jobType'
-                    value='Part-Time'
-                    checked={jobDetailData.jobType === 'Part-Time'}
-                    onChange = {handleChange}
-                />
-                <label htmlFor='Part-Time'>Part-Time</label>
-                <input
-                    type='radio'
-                    id='Contract'
-                    name='jobType'
-                    value='Contract'
-                    checked={jobDetailData.jobType === 'Contract'}
-                    onChange = {handleChange}
-                />
-                <label htmlFor='Contract'>Contract</label>
-            </fieldset>
-            <input 
-                // Job category
-                placeholder='Job Category'
-                type='text'
-                name='category'
-                id='category'
-                onChange={handleChange}
-                value={jobDetailData.category}
-            />
-            <input 
-                // Salary range
-                placeholder='Salary Range'
-                id='salayRange'
-                name='salaryRange'
-                type='text'
-                onChange={handleChange}
-                value={jobDetailData.salaryRange}
-            />  
-            <input 
-                // Experience Level
-                placeholder='Experience Level'
-                id='experienceLevel'
-                name='experienceLevel'
-                type='text'
                 onChange={handleChange}
                 value={jobDetailData.experienceLevel}
-            />
-            <input 
-                // Responsibilities
-                placeholder='Responsibilities'
-                id='responsibilities'
-                name='responsibilities'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Responsibilities"
+                id="responsibilities"
+                name="responsibilities"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.responsibilities}
-            />
-            <input 
-                // Qualifications
-                placeholder='Qualifications'
-                id='qualifications'
-                name='qualifications'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Qualifications"
+                id="qualifications"
+                name="qualifications"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.qualifications}
-            />            
-            <input 
-                // Company Description
-                placeholder='Company Description'
-                id='companyDescription'
-                name='companyDescription'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Company Description"
+                id="companyDescription"
+                name="companyDescription"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.companyDescription}
-            />
-            <input 
-                // Application Deadline
-                placeholder='Company Description'
-                id='applicationDeadline'
-                name='applicationDeadline'
-                type='date'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Application Deadline"
+                id="applicationDeadline"
+                name="applicationDeadline"
+                type="date"
                 onChange={handleChange}
                 value={jobDetailData.applicationDeadline}
-            />
-            <input 
-                // Application Process
-                placeholder='Application Process'
-                id='applicationProcess'
-                name='applicationProcess'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Application Process"
+                id="applicationProcess"
+                name="applicationProcess"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.applicationProcess}
-            />
-            <input 
-                // Benefits
-                placeholder='Benefits'
-                id='benefits'
-                name='benefits'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Benefits"
+                id="benefits"
+                name="benefits"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.benefits}
-            />
-            <input 
-                // Work Hours
-                placeholder='Work Hours'
-                id='workHours'
-                name='workHours'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Work Hours"
+                id="workHours"
+                name="workHours"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.workHours}
-            />
-            <input 
-                // Travel Requirements
-                placeholder='Travel Requirements'
-                id='travelRequirements'
-                name='travelRequirements'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Travel Requirements"
+                id="travelRequirements"
+                name="travelRequirements"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.travelRequirements}
-            />
-            <input 
-                // Diversity Statements
-                placeholder='Diversity Statements'
-                id='diversityStatement'
-                name='diversityStatement'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Diversity Statements"
+                id="diversityStatement"
+                name="diversityStatement"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.diversityStatement}
-            />
-            <input 
-                // Keywords
-                placeholder='Keywords'
-                id='keywords'
-                name='keywords'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Keywords"
+                id="keywords"
+                name="keywords"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.keywords}
-            />
-            <input 
-                // Perks
-                placeholder='Perks'
-                id='companyPerks'
-                name='companyPerks'
-                type='text'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Perks"
+                id="companyPerks"
+                name="companyPerks"
+                type="text"
                 onChange={handleChange}
                 value={jobDetailData.companyPerks}
-            />
-            <input 
-                // Email
-                placeholder='Email'
-                id='contactEmail'
-                name='contactEmail'
-                type='email'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Email"
+                id="contactEmail"
+                name="contactEmail"
+                type="email"
                 onChange={handleChange}
                 value={jobDetailData.contactEmail}
-            />
-            <input 
-                // Website
-                placeholder='Website'
-                id='companyWebsite'
-                name='companyWebsite'
-                type='url'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Website"
+                id="companyWebsite"
+                name="companyWebsite"
+                type="url"
                 onChange={handleChange}
                 value={jobDetailData.companyWebsite}
-            />
-            <input 
-                // Number
-                placeholder='Number'
-                id='contactNumber'
-                name='contactNumber'
-                type='number'
+                />
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Number"
+                id="contactNumber"
+                name="contactNumber"
+                type="number"
                 onChange={handleChange}
                 value={jobDetailData.contactNumber}
-            />
-            <fieldset> 
-                {/* Work Location */}
-                <legend>Work Location</legend>
-                <input
-                    type='radio'
-                    name='remoteWork'
-                    id='remoteWork'
+                />
+
+                <fieldset className="border p-3 rounded-md"> 
+                <legend className="font-semibold">Work Location</legend>
+                <div className="flex items-center space-x-6">
+                    <input
+                    className="accent-blue-500"
+                    type="radio"
+                    name="remoteWork"
+                    id="remoteWork"
                     value="In Person"
                     onChange={handleChange}
                     checked={jobDetailData.remoteWork === "In Person"}
-                />
-                <label htmlFor='In Person'>In Person</label>
-                <input
-                    type='radio'
-                    name='remoteWork'
-                    id='remoteWork'
+                    />
+                    <label htmlFor="In Person" className="cursor-pointer">In Person</label>
+                    <input
+                    className="accent-blue-500"
+                    type="radio"
+                    name="remoteWork"
+                    id="remoteWork"
                     value="Remote"
                     onChange={handleChange}
                     checked={jobDetailData.remoteWork === "Remote"}
-                />
-                <label htmlFor='Remote'>Remote</label>
-                <input
-                    type='radio'
-                    name='remoteWork'
-                    id='remoteWork'
-                    value='Hybrid'
+                    />
+                    <label htmlFor="Remote" className="cursor-pointer">Remote</label>
+                    <input
+                    className="accent-blue-500"
+                    type="radio"
+                    name="remoteWork"
+                    id="remoteWork"
+                    value="Hybrid"
                     onChange={handleChange}
                     checked={jobDetailData.remoteWork === "Hybrid"}
-                />
-                <label htmlFor='Hybrid'>Hybrid</label>
-            </fieldset>
-            <input 
+                    />
+                    <label htmlFor="Hybrid" className="cursor-pointer">Hybrid</label>
+                </div>
+                </fieldset>
+
+                <input 
+                className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
                 type="file"
                 id="companyLogo"
                 name="companyLogo"
                 onChange={handleChange}
                 />
-        <button>Submit</button>
-        </form>
-      )
-      
+
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          );
+          
+    
 }
 

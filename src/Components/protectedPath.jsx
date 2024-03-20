@@ -2,45 +2,26 @@ import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from "firebase/auth"; // Make sure to import these
 
-// export default function ProtectedPath(){
-//     const [isAuthenticated, setIsAuthenticated] = React.useState(false)
-
-//     React.useEffect(() => {
-//         const auth = getAuth();
-//         const unsubscribe = onAuthStateChanged(auth, (user) => {
-//             console.log("Auth state changed:", user);
-//             if (user) {
-//                 setIsAuthenticated(true);
-//             } else {
-//                 setIsAuthenticated(false);
-//             }
-//         });
-//         return () => unsubscribe();
-//     }, []);
-
-
-//     return(
-//         <>
-//             {isAuthenticated? <Outlet /> : <Navigate to='/login' state={{message: "You must log in first"}}  />}
-//         </>
-//     )
-// }
 
 export default function ProtectedPath() {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-    const [loading, setLoading] = React.useState(true); 
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         const auth = getAuth();
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 setIsAuthenticated(true);
             } else {
                 setIsAuthenticated(false);
             }
-            setLoading(false); 
+            setLoading(false);
         });
-        return () => unsubscribe();
+
+        // Note for future improvement:
+        // Consider adding unsubscribe logic here to clean up the subscription
+        // when the component unmounts. This will prevent potential memory leaks
+        // and other side effects of stale subscriptions.
     }, []);
 
     if (loading) {

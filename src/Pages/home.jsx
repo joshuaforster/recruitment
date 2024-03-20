@@ -1,17 +1,23 @@
 import React from 'react'
 import SearchBar from '../customComponents/searchBar'
-import { Outlet } from 'react-router-dom'
+import ResultsArray from '../customComponents/resultsArray'
 import JobSubmission from './jobsubmission'
 
 
 export default function Home(){
 
-    console.log(JobSubmission)
+    const [showResults, setShowResults]= React.useState(false)
+
+    function handleSearchClick(){
+        setShowResults(true)
+    }
+
     return(
-        <>
-            <h1 className='text-green text-2xl'>This is the home Page</h1>
-            <SearchBar />
-            <Outlet />
-        </>
+        <div className='mt-4'>
+            <div className='mx-4 md:mx-12 lg:mx-24'>
+                <SearchBar onSearch={handleSearchClick}/>
+                {showResults && <ResultsArray/>}
+            </div>
+        </div>
     )
 }

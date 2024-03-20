@@ -1,11 +1,12 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 
 export default function SignIn(){
 
+    const navigate = useNavigate()    
     const location = useLocation()
     console.log(location)
 
@@ -32,6 +33,7 @@ signInWithEmailAndPassword(auth, loginData.email, loginData.password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    navigate('/jobsubmission')
     // ...
   })
   .catch((error) => {
@@ -41,28 +43,34 @@ signInWithEmailAndPassword(auth, loginData.email, loginData.password)
     }
     
     return(
-        <>
-            {location? <h1>Sign in</h1>: ''}
-            <form onSubmit={handleSubmit}>
-                <input
-                    placeholder='Email Adress'
-                    type='email'
-                    id='email'
-                    name='email'
-                    onChange={handleChange}
-                    value={loginData.email}
-                />
-                <input
-                    placeholder='Password'
-                    type='password'
-                    id='password'
-                    name='password'
-                    onChange={handleChange}
-                    value={loginData.password}
-                />
-                <button>Submit</button>
-            </form>
-        </>
+        <div className='mt-4'>
+        <div className='mx-4 md:mx-12 lg:mx-24'>
+          {location ? <h1 className="text-2xl font-bold my-4">Sign in</h1> : ''}
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <input
+              className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder='Email Address'
+              type='email'
+              id='email'
+              name='email'
+              onChange={handleChange}
+              value={loginData.email}
+            />
+            <input
+              className="border-2 border-gray-200 p-2 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder='Password'
+              type='password'
+              id='password'
+              name='password'
+              onChange={handleChange}
+              value={loginData.password}
+            />
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     )
 }
 
