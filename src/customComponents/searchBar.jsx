@@ -1,5 +1,5 @@
 import React from 'react'
-import ResultsArray from './resultsArray'
+
 
 export default function SearchBar(props){
 
