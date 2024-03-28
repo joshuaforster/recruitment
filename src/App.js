@@ -8,6 +8,7 @@ import Layout from './Components/layout';
 import ProtectedPath from './Components/protectedPath';
 import SignIn from './Pages/login';
 import SignUp from './Pages/signUp';
+import ArrayDetails from './customComponents/arraydetails';
 
 
 // Import the functions you need from the SDKs you need
@@ -66,9 +67,9 @@ export default function App() {
             <Route path="/" element={<Home />} >
               <Route path="array" element={<ResultsArray />} />
             </Route>
+            <Route path='array/:id' element={<ArrayDetails/>} />
             <Route path="login" element={<SignIn />} />
             <Route path="SignUp" element={<SignUp />} />
-            {/* Wrap the protected route */}
             <Route element={<ProtectedPath />}>
               <Route path="jobsubmission" element={<JobSubmission />} />
             </Route>

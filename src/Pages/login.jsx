@@ -44,7 +44,7 @@ signInWithEmailAndPassword(auth, loginData.email, loginData.password)
     
     return(
         <div className='mt-4'>
-        <div className='mx-4 md:mx-12 lg:mx-24'>
+        <div className='px-4 md:px-12 lg:px-24 max-w-screen-2xl mx-auto'>
           {location ? <h1 className="text-2xl font-bold my-4">Sign in</h1> : ''}
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
             <input
